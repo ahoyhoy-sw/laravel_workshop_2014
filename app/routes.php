@@ -23,7 +23,12 @@ Route::pattern('id', '[0-9]+');
 // HEAD
 Route::get('/', function()
 {
-	return 'HEAD Pages';
+	return View::make('blog-home');
+});
+
+Route::get('blog-post', function()
+{
+	return View::make('blog-post');
 });
 
 // About
