@@ -16,8 +16,56 @@
 //{
 //	return View::make('hello');
 //});
+//------------------------------------------------------------------------------
+// + Controller, Views
+// View::maks('{url}', '{param}');
 
+// home
+Route::get('/', function()
+{
+	return View::make('home.index');
+});
+
+// categories
+Route::get('categories/create', function()
+{
+	return View::make('categories.create');
+});
+
+Route::get('categories/show', function()
+{
+	// pass single value, $name @View
+//	$data = array('name' => 'test_value');
+//	return View::make('categories.show', $data);
+
+	// pass array ($name1, $nam2 @View)
+//	$data = array('name1' => 'test_value', 'name2' => 'test_value2');
+//	return View::make('categories.show', $data);
+	
+	// pas  2-d array
+	$categories = Category::all();
+	return View::make('categories.show', $categories);
+
+});
+
+Route::get('categories/edit', ['as' => 'cat.edit', function()
+{
+	return View::make('categories.edit');
+}]);
+
+// posts
+Route::get('posts', ['as' => 'posts.index', 'uses' => 'PostsController@index']);
+Route::get('posts/create', ['as' => 'posts.create', 'uses' => 'PostsController@create']);
+Route::post('posts', ['as' => 'posts.store', 'uses' => 'PostsController@store']);
+Route::get('posts/{id}', ['as' => 'posts.show', 'uses' => 'PostsController@show']);
+Route::get('posts/{id}/edit', ['as' => 'posts.edit', 'uses' => 'PostsController@edit']);
+Route::patch('posts/{id}', ['as' => 'posts.update', 'uses' => 'PostsController@update']);
+Route::delete('posts/{id}', ['as' => 'posts.destroy', 'uses' => 'PostsController@destroy']);
+
+
+//------------------------------------------------------------------------------
 /* Laravel workshop */
+/*
 Route::pattern('id', '[0-9]+');
 
 // HEAD
@@ -83,9 +131,9 @@ Route::get('login', function()
 {
 	return 'Login pages';
 });
+*/
 
-
-
+//------------------------------------------------------------------------------
 /* test ORM
 Route::get('/', function()
 {
