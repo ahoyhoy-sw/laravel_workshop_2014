@@ -20,11 +20,16 @@
 // + Controller, Views
 // View::maks('{url}', '{param}');
 
-// home
+// home (list all posts)
 Route::get('/', function()
 {
 	return View::make('home.index');
 });
+
+// login
+Route::get('auth', ['as' => 'auth.index', 'uses' => 'AuthController@index']);
+Route::post('auth/login', ['as' => 'auth.process', 'uses' => 'AuthController@process']);
+Route::get('auth/logout', ['as' => 'auth.logout', 'uses' => 'AuthController@logout']);
 
 // categories
 Route::get('categories/create', function()

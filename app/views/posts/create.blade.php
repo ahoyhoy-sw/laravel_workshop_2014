@@ -10,10 +10,10 @@ Posts - Create @parent
 @section('content')
 	<h1>Create New Post</h1>
 
-	{{ Form::open(array('url' => '/', 'method' => 'put')) }}
-	Title   : {{ Form::text('txtPostTitle', '') }} <br>
-	Category: {{ Form::text('txtPostCategroy', '') }} <br>
-	Content : {{ Form::textarea('txtPostCotent', '') }} <br>
+	{{ Form::open(array('route' => 'posts.store', 'method' => 'POST')) }}
+	Title   : {{ Form::text('title', '') }} <br>
+	Category: {{ Form::text('category_id', '') }} <br>
+	Content : {{ Form::textarea('content', '') }} <br>
 	{{ Form::submit('Submit') }}
 	{{ Form::close() }}
 

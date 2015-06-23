@@ -23,6 +23,7 @@ class PostsController extends \BaseController {
 	public function create()
 	{
 		//
+		return View::make('posts.create');
 	}
 
 
@@ -33,7 +34,23 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$inputs = Input::all();
+
+		// validation
+//		$validation = Validator::make($inputs, Post::rules);
+//		if ($validation->fails())
+//			return Redirect::back()->withErrors($validation)->withInput();
+		
+		// Store
+		Post::create($inputs);		// field_name@Form must match with model name
+
+		//$post = new Post;
+		//$post->title = $inputs["title"];
+		//$post->category_id = intval($inputs["category_id"]);
+		//$post->content = $inputs["content"];
+		//$post->save();
+
+		return Redirect::route('posts.index')->with('success', 'Successfully@@');	// $message?
 	}
 
 
@@ -46,10 +63,14 @@ class PostsController extends \BaseController {
 	public function show($id)
 	{
 		//
-		$post = Post::find($id);
+		$post = Post::findOrFail($id);
+		$comments = $post->comments;
+
+		$data = compact('post', 'comments');
 		
 		// ->with('name', value)
-		return View::make('posts.show')->with('post', $post);
+//		return View::make('posts.show')->with('post', $post);
+		return View::make('posts.show', $data);
 	}
 
 
@@ -62,6 +83,11 @@ class PostsController extends \BaseController {
 	public function edit($id)
 	{
 		//
+		$post = Post::find($id);
+		if(is_null($post))
+			App::abort(404);	// throw NofFoundHttpException with $code=404
+
+		return View::make('posts.edit')->with('post', $post);
 	}
 
 
@@ -73,7 +99,13 @@ class PostsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$inputs = Input::all();
+
+		// input validation
+		$post = Post::findOrFail($id);
+		$post->update($inputs);		// field_name must match with key_name
+		//return Redirect::route('posts.index')->with('failed', 'Failed!!');
+		return Redirect::route('posts.index')->with('success', 'Update Ok!!');
 	}
 
 
@@ -86,6 +118,10 @@ class PostsController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+		Post::destroy($id);
+
+		//$post = findOrFail($id);
+		return Redirect::route('posts.index');
 	}
 
 

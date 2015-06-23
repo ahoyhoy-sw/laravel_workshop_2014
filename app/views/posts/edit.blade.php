@@ -8,12 +8,12 @@ Post - Edit @parent
 
 <!-- update content -->
 @section('content')
-	<h1>Update Post</h1>
+	<h1>Edit Post</h1>
 
-	{{ Form::open(array('url' => '/', 'method' => 'put')) }}
-	Title    : {{ Form::text('txtPostTitle', '') }} <br>
-	Category : {{ Form::text('txtPostCategory', '') }} <br>
-	Content  : {{ Form::textarea('txtPostContent', '') }} <br>
+	{{ Form::open(array('route' => ['posts.update', $post->id], 'method' => 'PATCH')) }}
+	Title    : {{ Form::text('title', '') }} <br>
+	Category : {{ Form::text('category_id', '') }} <br>
+	Content  : {{ Form::textarea('content', '') }} <br>
 	{{ Form::submit('Submit') }}
 	{{ Form::close() }}
 @stop

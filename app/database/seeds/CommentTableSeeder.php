@@ -8,6 +8,9 @@ class CommentTableSeeder extends Seeder {
 	public function run()
 	{
 		$faker = Faker::create();
+		
+		// clear all data
+		DB::table('comments')->truncate();
 
 		foreach(range(1, 20) as $index)
 		{

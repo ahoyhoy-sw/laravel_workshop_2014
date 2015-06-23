@@ -9,6 +9,9 @@ class CategoryTableSeeder extends Seeder {
 	{
 		$faker = Faker::create();
 
+		// Clear all data 
+		DB::table('categories')->truncate();
+
 		foreach(range(1, 4) as $index)
 		{
 			Category::create([
