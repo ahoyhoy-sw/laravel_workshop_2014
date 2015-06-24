@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'laravel_test',
-			'username'  => 'laravel_test',
-			'password'  => 'laravel_test',
+			'host'      => isset($_SERVER['DATABASE1_HOST']) ? $_SERVER['DATABASE1_HOST'] : 'localhost',
+			'database'  => isset($_SERVER['DATABASE1_NAME']) ? $_SERVER['DATABASE1_NAME'] : 'laravel_test',
+			'username'  => isset($_SERVER['DATABASE_USER']) ? $_SERVER['DATABASE1_USER'] : 'laravel_test',
+			'password'  => isset($_SERVER['DATABASE1_PASS']) ? $_SERVER['DATABASE1_PASS'] : 'laravel_test',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

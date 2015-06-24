@@ -31,11 +31,3 @@ storage1:
   name: filestore
   type: nfs
   
-cache1:
-  name: sessions
-  type: redis
-  
-worker1:
-  name: image_processor
-  type: php
-  exec: 'php workers/image_processor.php'
